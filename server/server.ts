@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
+import connectDB from './config/db';
+import usersRoutes from './routes/users';
 
 dotenv.config();
 
@@ -10,20 +11,12 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/users', usersRoutes);
 
 app.get('/', (req, res) => {
   res.send('Backend Server is running!');
 });
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI as string)
-    console.log('MongoDB connected successfully');
-  } catch (error) {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
-  }
-}
 
 app.listen(PORT, async () => {
   await connectDB();
