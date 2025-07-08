@@ -1,13 +1,20 @@
 import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/dashboard';
+import Reports from './pages/reports';
+import Settings from './pages/settings';
+import MainLayout from './layouts/mainLayout';
 
 function App() {
 
   return (
-    <>
-      <div className="min-h-screen bg-red-500 text-white flex items-center justify-center text-4xl font-bold">
-        Hello - Test for Tailwind
-      </div>
-    </>
+    <MainLayout>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/reports" element={<Reports />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </MainLayout>
   )
 }
 
